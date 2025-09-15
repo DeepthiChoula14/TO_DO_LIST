@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+</head>
+<body>
+    <h1>MY TO-DO List</h1>
+    <input type="text" id="taskInput" placeholder="Add a new task">
+    <button onclick="addTask()">Add</button>
+    <ul id="tasklist"></ul>
+    <script>
+        function addTask(){
+            // Get the input value
+            var taskText = document.getElementById("taskInput").value.trim();
+            // check if the input is not empty
+            if (taskText!==""){
+            //create a new list item
+            var listItem = document.createElement("li");
+            listItem.innerHTML = taskText;
+
+            // Add an edit button
+            var editButton=document.createElement("button");
+            editButton.innerHTML = "Edit";
+            editButton.onclick =function(){
+                editTask(listItem);
+            };
+            // Add a delete button
+            var deleteButton=document.createElement("button");
+            deleteButton.innerHTML = "Delete";
+            deleteButton.onclick=function(){
+                deleteTask(listItem);
+            };
+            // Append buttons to the list item
+            listItem.appendChild(editButton);
+            listItem.appendChild(deleteButton);
+
+            // Add the LIST TO THE TASK list
+            document.getElementById("tasklist").appendChild(listItem);
+
+            // clear the input field
+            document.getElementById("taskInput").value = "";
+        }
+    }
+    function editTask(listItem){
+        var updatedText = prompt("Edit the task:" ,listItem.innerHTML.trim());
+        if(updatedText!== null){
+            listItem.innerHTML=updatedText;
+        }
+    }
+    function deleteTask(listItem){
+        listItem.remove();
+    }
+    </script>
+</body>
+</html>
